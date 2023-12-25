@@ -18,7 +18,8 @@ if [ $1 -ne 0 ]
     else
         echo -e "$2... $G SUCCESS $N"
         
-fi 
+fi
+ 
 }
 
 if [ $ID -ne 0 ]
@@ -28,6 +29,7 @@ exit 1
 else
 echo "You are root user"
 fi 
+
 
 dnf module disable nodejs -y &>> $LOGFILE
 
@@ -40,6 +42,15 @@ VALIDATE $? "Enabling current Nodejs"
 dnf install nodejs -y &>> $LOGFILE
 
 VALIDATE $? "Installing  Nodejs:18" 
+
+if [ $?-ne 0 ]
+then
+useradd roboshop
+VALIDATE $? "Roboshop user creation"
+else
+echo -e "roboshop user already exist  $Y Skipping $N"
+
+fi
 
 useradd roboshop &>> $LOGFILE
 
@@ -91,4 +102,8 @@ VALIDATE $? "Installing Mongodb Client"
 mongo --host MONGODB-SERVER-IPADDRESS </app/schema/catalogue.js &>> $LOGFILE
 
 VALIDATE $? "Loading catalogue Data into MongoDB"
+
+
+
+
 
