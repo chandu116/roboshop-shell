@@ -31,7 +31,6 @@ else
 echo "You are root user"
 fi 
 
-
 dnf install nginx -y &>> $LOGFILE 
 
 VALIDATE $? "Installing nginx"  
