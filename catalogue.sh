@@ -5,6 +5,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
+MONGODB_HOST=mongodb.daws6s.online
 
 TIMESTAMP=$(date +%-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
@@ -74,7 +75,7 @@ npm install &>> $LOGFILE
 
 VALIDATE $? "Installing  dependencies" 
 
-# use Absoulute, Because catalogue.service exists there 
+# use Absoulute path, Because catalogue.service exists there 
 cp /home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
 
 VALIDATE $? "Copying Catalogue service file"
@@ -99,9 +100,9 @@ dnf install mongodb-org-shell -y &>> $LOGFILE
 
 VALIDATE $? "Installing Mongodb Client"
 
-mongo --host MONGODB-SERVER-IPADDRESS </app/schema/catalogue.js &>> $LOGFILE
+mongo --host $MONGODB_HOST </app/schema/catalogue.js &>> $LOGFILE
 
-VALIDATE $? "Loading catalogue Data into MongoDB"
+VALIDATE $? "Loading catalogue Data into MongoDB" 
 
 
 
