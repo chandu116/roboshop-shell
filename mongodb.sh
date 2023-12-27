@@ -48,6 +48,8 @@ VALIDATE $? "Starting MONGO DB"
 
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE
 
+VALIDATE $? "Remote access to MONGO DB" 
+
 systemctl restart mongod &>> $LOGFILE
 
 VALIDATE $? "Restarting MONGO DB" 
