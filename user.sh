@@ -44,20 +44,19 @@ dnf install nodejs -y &>> $LOGFILE
 
 VALIDATE $? "Installing  Nodejs:18" 
 
+id roboshop
 if [ $?-ne 0 ]
 then
 useradd roboshop
 VALIDATE $? "Roboshop user creation"
 else
 echo -e "roboshop user already exist  $Y Skipping $N"
-
 fi
 
-useradd roboshop &>> $LOGFILE
+#useradd roboshop &>> $LOGFILE
+#VALIDATE $? "Creating roboshop user" 
 
-VALIDATE $? "Creating roboshop user" 
-
-mkdir /app &>> $LOGFILE
+mkdir -p /app &>> $LOGFILE
 
 VALIDATE $? "Creating App directory"  
 
